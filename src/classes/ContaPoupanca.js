@@ -7,7 +7,7 @@ class ContaPoupanca extends Conta {
     }
 
     aplicarRendimento() {
-        this.saldo = this.saldo * this.rendimento;
+        this.saldo += this.saldo * this.rendimento;
     }
 }
 
