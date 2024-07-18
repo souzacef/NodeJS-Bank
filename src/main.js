@@ -1,7 +1,14 @@
 const ContaCorrente = require("./classes/ContaCorrente");
 const ContaPoupanca = require("./classes/ContaPoupanca");
-const Conta = require("./classes/Conta");
 const prompt = require("./utils/prompt");
+
+const criarConta = require("./funcoes/criarConta");
+const depositar = require("./funcoes/depositar");
+const sacar = require("./funcoes/sacar");
+const aplicarJurosOuRendimento = require("./funcoes/aplicarJurosOuRendimento");
+const consultarSaldo = require("./funcoes/consultarSaldo");
+
+const contas = [];
 
 let continuar = true;
 
@@ -14,28 +21,28 @@ while (continuar) {
     console.log("5 - Consultar Saldo");
     console.log("6 - Sair");
 
-    const opcao = +prompt("Digite a opção desejada");
+    const opcao = +prompt("Digite a opção desejada: ");
 
-    switch (opcao){
+    switch (opcao) {
         case 1:
-            criarConta();
+            criarConta(contas);
             break;
         case 2:
-            deposito();
+            depositar(contas);
             break;
         case 3:
-            sacar();
+            sacar(contas);
             break;
         case 4:
-            aplicarJurosOuRendimento();
+            aplicarJurosOuRendimento(contas);
             break;
         case 5:
-            consultarSaldo();
+            consultarSaldo(contas);
             break;
         case 6:
             continuar = false;
-            console.log("Saindo do sistema bancario...");
-            break
+            console.log("Saindo do sistema bancário...");
+            break;
         default:
             console.log("Opção inválida! Tente novamente.\n");
             break;

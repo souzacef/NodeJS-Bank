@@ -5,14 +5,14 @@ class Conta {
     }
 
     depositar(valor) {
-        this.saldo += this.valor;
+        this.saldo += valor;
     }
 
     sacar(valor) {
-        if(valor <= this.saldo) {
-            this.saldo -= this.valor;
-            console.log(`Saque de R% ${valor} realizado com sucesso.`);
-            console.log(`Saldo atual: R$ ${this.saldo}`);
+        if (valor <= this.saldo) {
+            this.saldo -= valor;
+            console.log(`\nSaque de R$ ${valor} realizado com sucesso. `);
+            console.log(`Saldo atual: R$ ${this.saldo}\n`);
         } else {
             console.log("Saldo insuficiente para realizar a operação!");
         }

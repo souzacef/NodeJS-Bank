@@ -1,8 +1,8 @@
 const Conta = require("./Conta");
 
-class ContaCorrente extends Conta{
+class ContaCorrente extends Conta {
     constructor(titular, saldo, juros) {
-        super(titular, saldo)
+        super(titular, saldo);
         this.juros = juros;
     }
 
