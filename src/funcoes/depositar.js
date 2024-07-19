@@ -2,25 +2,30 @@ const prompt = require("../utils/prompt");
 
 function depositar(contas) {
     while (true) {
-        console.log("\n==========Menu de depósito.==========\n");
-        const titular = prompt("Digite o nome do titular (ou 0 para voltar): ");
-        
-        if (titular === "0") return;
+        console.log("\n========== Depósito ==========\n");
+        const titular = prompt("Digite o nome do titular (ou 0 para voltar): ").toLowerCase(); // Solicita o nome do titular
 
-        const conta = contas.find(c => c.titular === titular);
+        if (titular === "0") return; // Retorna ao menu principal se o usuário digitar 0
+
+        const conta = contas.find(c => c.titular.toLowerCase() === titular); // Procura a conta pelo titular
 
         if (conta) {
-            let valor = prompt("Digite o valor a ser depositado: ").replace(",", ".");
-            if (!/^\d+(\.\d{1,2})?$/.test(valor) || parseFloat(valor) <= 0) {
-                console.log('O valor do depósito deve ser um número positivo e válido.');
-                continue;
+            let valor = "";
+            while (true) {
+                valor = prompt("Digite o valor do depósito: ").replace(",", ".");
+                if (!/^\d+(\.\d{1,2})?$/.test(valor) || parseFloat(valor) <= 0) {
+                    console.log('O valor do depósito deve ser um número positivo e válido.'); // Validação do valor do depósito
+                } else {
+                    valor = parseFloat(valor).toFixed(2);
+                    break;
+                }
             }
-            valor = parseFloat(valor).toFixed(2);
-            conta.depositar(parseFloat(valor));
+            conta.depositar(parseFloat(valor)); // Realiza o depósito na conta
             console.log(`Depósito de R$ ${valor.replace(".", ",")} realizado com sucesso!\n`);
-            break;
+            console.log(`Saldo atualizado: R$ ${conta.getSaldo().toFixed(2).replace(".", ",")}`);
+            return; // Retorna ao menu principal após realizar o depósito
         } else {
-            console.log("Conta não encontrada! Tente novamente.\n");
+            console.log("Conta não encontrada! Tente novamente.\n"); // Mensagem para conta não encontrada
         }
     }
 }
